@@ -1,0 +1,72 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{%url 'home'%}"> <i class="fa fa-cart-plus"></i> shopkart</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+        {% if request.user.is_authenticated %}
+        <button data-text="Awesome" class="button">
+          <span class="actual-text">&nbsp;{{request.user}}&nbsp;</span>
+          <span class="hover-text" aria-hidden="true">&nbsp;{{request.user}}&nbsp;</span>
+        </button>
+          <a class="nav-link" aria-current="page" href="{% url 'logout' %}"><i class="fa fa-sign-out"></i> Logout</a>
+        {% else %}
+          <a class="nav-link" href="{% url 'login' %}"><i class="fa fa-sign-in"></i>Login</a>
+          <a class="nav-link" href="{% url 'register' %}"><i class="fa fa-users"></i>Register</a>
+        {% endif %}
+          <a class="nav-link" href="{% url 'collections' %}"><i class="fa fa-cubes"></i>Collections</a>
+          <a class="nav-link" href="{% url 'cart' %}"><i class="fa fa-shopping-cart"></i>Cart</a>
+          <a class="nav-link" href="#"><i class="fa fa-heart"></i>Favourite</a>
+          <a class="nav-link" href="{% url 'premium' %}"><i class="fa fa-money"></i>vendor</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <style>
+    /* === removing default button style ===*/
+.button {
+  margin: 0;
+  height: auto;
+  background: transparent;
+  padding: 0;
+  border: none;
+}
+
+/* button styling */
+.button {
+  --border-right: 6px;
+  --text-stroke-color: rgba(255,255,255,0.6);
+  --animation-color: #37FF8B;
+  --fs-size: 2em;
+  letter-spacing: 3px;
+  text-decoration: none;
+  font-size: 25px;
+  font-family: "Arial";
+  position: relative;
+  text-transform: uppercase;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--text-stroke-color);
+}
+/* this is the text, when you hover on button */
+.hover-text {
+  position: absolute;
+  box-sizing: border-box;
+  content: attr(data-text);
+  color: var(--animation-color);
+  width: 0%;
+  inset: 0;
+  border-right: var(--border-right) solid var(--animation-color);
+  overflow: hidden;
+  transition: 0.5s;
+  -webkit-text-stroke: 1px var(--animation-color);
+}
+/* hover */
+.button:hover .hover-text {
+  width: 100%;
+  filter: drop-shadow(0 0 23px var(--animation-color))
+}
+
+</style>

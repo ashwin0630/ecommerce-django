@@ -1,0 +1,62 @@
+{% extends 'shop/layouts/main.html'%}
+
+{% block title%}
+shopping kart
+{% endblock title%}
+
+
+{% block content%}
+
+
+<section class="py-4 my-5 mycard">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h4 class="lead" style="color: gold; font-size: 30px;">{{cname}}</h4>
+                <hr style="border-color: aqua;">
+                {% include 'shop/inc/message.html' %}
+            </div>
+            {% for item in products %}
+            <div class="col-md-4 col-lg-3 mycard">
+                <div class="poet card my-3 mycard mybor">
+                  <img src="{{item.product_image.url}}"  class="card-image-top" alt="Categories" style="height: 300px;">
+                  <a href="{% url 'product_details' cname item.name %}">
+                  <div class="card-body">
+                    <h5 class="card-title text-primary">{{item.name}}</h5>
+                    <p class="card-text">
+                        
+                        <span class="float-start old_price"> <s> Rs.{{item.original_price | stringformat:'d'}}</s></span>
+                        <span class="float-end new_price">Rs.{{item.selling_price | stringformat:'d'}}</span>
+                    </p>                    
+                  </div>
+                </a>
+                </div>
+            </div>
+            
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+
+<style>
+    .mycard{
+      background-color: #212529;
+    }
+  
+    body{
+      background-color: #212529;
+    }
+  
+    .mybor{
+      border-color: #a3bffa;
+      border-style: solid;
+      border-width: 5px;
+    }
+  
+    a {
+    text-decoration: none;
+  }
+  </style>
+
+{% endblock content%}
